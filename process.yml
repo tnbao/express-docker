@@ -1,4 +1,6 @@
 apps:
 - script: index.ts
-  instances: 4
+  interpreter: 'node'
+  interpreter_args: '--import tsx'
+  instances: 2
   exec_mode: cluster
