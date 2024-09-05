@@ -3,9 +3,8 @@ import path from 'node:path'
 
 type File = {
   name: string
-  folder: string
-  relativePath: string
-  absolutePath: string
+  parentFolder: string
+  folderPath: string
   size: number
 }
 
@@ -36,9 +35,8 @@ export function scanDiskDrive(rootFolderPath: string, searchExtensions: string |
             const stats = fs.statSync(itemPath)
             files.push({
               name: item.name,
-              folder: folderPath.split('/').at(-1)!,
-              relativePath: `${folderPath.replace(rootFolderPath, '')}/${item.name}`,
-              absolutePath: `${folderPath}/${item.name}`,
+              parentFolder: folderPath.split('/').at(-1)!,
+              folderPath,
               size: stats.size,
             })
           } catch (error: unknown) {
