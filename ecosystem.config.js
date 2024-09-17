@@ -5,7 +5,7 @@ export default {
       interpreter: 'node',
       interpreterArgs: '--import tsx',
       instances: 2,
-      exec_mode: cluster,
+      exec_mode: 'cluster',
     },
   ],
 }
