@@ -1,5 +1,8 @@
 import express from 'express'
+import dotenv from 'dotenv'
 import { scanDiskDrive } from './scanDiskDrive'
+
+dotenv.config()
 
 const app = express()
 
@@ -9,7 +12,11 @@ app.use(express.json())
 app.get('/', (req, res) => res.send('Dockerizing Node Application'))
 
 app.get('/api/scanDiskDrive', (req, res) => {
-  const { folder, ext } = req.query
+  const { apikey, folder, ext } = req.query
+
+  if (apikey !== process.env.APIKEY) {
+    return res.status(401).send('Invalid apikey!')
+  }
 
   if (typeof folder !== 'string' || typeof ext !== 'string') {
     return res.send('Query is not valid.')
