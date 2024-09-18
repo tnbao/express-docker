@@ -14,8 +14,8 @@ app.get('/', (req, res) => res.send('Dockerizing Node Application'))
 app.get('/api/scanDiskDrive', (req, res) => {
   const { apikey, folder, ext } = req.query
 
-  if (apikey !== process.env.APIKEY) {
-    return res.status(401).send('Invalid apikey!')
+  if (!apikey || apikey !== process.env.APIKEY) {
+    return res.status(401).send('Invalid or missing apikey!')
   }
 
   if (typeof folder !== 'string' || typeof ext !== 'string') {
